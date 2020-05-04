@@ -77,7 +77,85 @@ class Aplicacao:
     """
     def __init__(self):
         self.janela = tk.Tk()
+        self.janela.iconbitmap('img/logo.ico')
+        self.janela.title('EasyHash v0.1')
+        self.janela.geometry("517x120+600+400")
+        self.janela.resizable(False, False)
+
+        self.logo = tk.PhotoImage(file='img/hash_icon.png')
+        self.lblogo = tk.Label(image=self.logo)
+        self.lblogo.grid(row=0, column=4, padx=165)
+
+        self.selected_option = tk.StringVar()
+        self.hash_seletion = ttk.Combobox(self.janela,
+                                          width=10,
+                                          cursor='hand2',
+                                          textvariable=self.selected_option,
+                                          state='readonly')
+
+        self.hash_seletion.set('MD5')
+        self.hash_seletion["values"] = ("MD5", "SHA-1", "SHA-256")
+        self.hash_seletion.grid(row=0, column=0)
+
+        self.icone_botao_arquivo = tk.PhotoImage(file='img/Icone_Pasta.png')
+        self.botao_abrir_arquivo = tk.Button(self.janela,
+                                             borderwidth=0,
+                                             image=self.icone_botao_arquivo,
+                                             cursor='hand2',
+                                             command=self.botao_arquivo)
+
+        self.botao_abrir_arquivo.grid(row=0, column=1, padx=10)
+
+        self.lb1 = tk.Label()
+        self.lb1.place(x=0, y=40)
+
+        self.lbcopy = tk.Label(text='EasyHash, Copyright © 2020 Wesley Ribeiro Dias, Pedro H. N. Bernardes')
+        self.lbcopy.place(x=130, y=100)
+
+        self.salvar_imagem = tk.PhotoImage(file='img/salvar_icone.png')
+        self.bt_salvar = tk.Button(command=self.salvar_hash,
+                                   image=self.salvar_imagem,
+                                   borderwidth=0,
+                                   state='disable')
+
+        self.bt_salvar.place(x=0, y=90)
+
+        self.hash_final = tk.Text(self.janela, state='disable', height=1, width=64)
+        self.hash_final.place(x=0, y=65)
         self.janela.mainloop()
+
+    def botao_arquivo(self) -> None:
+        """
+        botao_arquivo(): Serve para ler um arquivo do computador
+        e a partir deste arquivo gerar a hash, e habilitar o botao salvar
+        :return: None
+        """
+        hash_final_texto = ''
+        tipo_hash = self.hash_seletion.get()
+        arquivo = askopenfilename()
+        if arquivo != '':
+            self.bt_salvar['state'] = 'normal'
+            self.bt_salvar['cursor'] = 'hand2'
+            self.lb1['text'] = f'Hash: {tipo_hash} | Arquivo: {arquivo}'
+            if tipo_hash == 'MD5':
+                hash_final_texto = Criptografia(arquivo).md5()
+            elif tipo_hash == 'SHA-1':
+                hash_final_texto = Criptografia(arquivo).sha1()
+            elif tipo_hash == 'SHA-256':
+                hash_final_texto = Criptografia(arquivo).sha256()
+            self.hash_final['state'] = 'normal'
+            self.hash_final.delete(0.0, tk.END)
+            self.hash_final.insert(0.0, hash_final_texto)
+            self.hash_final['state'] = 'disable'
+
+    def salvar_hash(self) -> None:
+        """
+        salvar_hash(): Serve para salvar a hash gerada em um arquivo de texto
+        :return: None
+        """
+        with open(f'{asksaveasfilename(filetypes=[("Text files", "*.txt")])}.txt', 'w') as arq:
+            arq.write(self.hash_final.get(0.0, tk.END))
+
 
 if __name__ == '__main__':
     run = Aplicacao()
