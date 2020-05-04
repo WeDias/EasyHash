@@ -14,4 +14,12 @@ bastando apenas alguns cliques para realizar tal operação. Desenvolvido utiliz
 - [x] SHA-256
 
 ---
+### Para instalar e executar em seu computador:
+Siga estes passos para instalar em sua máquina
+```
+1- Baixar este repositório
+2- Executar o arquivo easyhash.pyw (/easyhash/data/easyhash.pyw)
+```
+
+---
 ###### ✏️ Desenvolvido por: [*Wesley Dias*](https://github.com/WeDias), [*Pedro Nepomuceno*](https://github.com/pedrohnb)
