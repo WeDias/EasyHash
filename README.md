@@ -1,5 +1,6 @@
-![logo](https://github.com/WeDias/EasyHash/blob/master/easyhash/data/img/hash_icon.png)   
+![logo](https://github.com/WeDias/EasyHash/blob/master/easyhash/data/img/hash_icon.png)
 
+---
 ![execucao](https://github.com/WeDias/EasyHash/blob/master/ignorar/execucao.gif)
 
 ---
