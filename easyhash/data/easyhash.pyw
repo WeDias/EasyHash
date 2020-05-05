@@ -107,7 +107,7 @@ class Aplicacao:
         self.botao_abrir_arquivo.grid(row=0, column=1, padx=10)
 
         self.lb1 = tk.Label()
-        self.lb1.place(x=0, y=40)
+        self.lb1.place(x=0, y=42)
 
         self.lbcopy = tk.Label(text='EasyHash, Copyright © 2020 Wesley Ribeiro Dias, Pedro H. N. Bernardes')
         self.lbcopy.place(x=130, y=100)
