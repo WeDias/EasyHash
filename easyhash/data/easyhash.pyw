@@ -349,6 +349,4 @@ class Aplicacao:
 
 
 if __name__ == '__main__':
-    for hash_ in hashlib.algorithms_available:
-        print(hash_)
     run = Aplicacao()
